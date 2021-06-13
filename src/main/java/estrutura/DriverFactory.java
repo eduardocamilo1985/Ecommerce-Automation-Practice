@@ -1,3 +1,5 @@
+package estrutura;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -14,7 +16,6 @@ public class DriverFactory {
             }
         return driver;
 
-
         }
     }
-}
+

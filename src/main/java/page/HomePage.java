@@ -10,5 +10,9 @@ public class HomePage extends Basic {
     public void btnSigIn(){
         clicar(By.linkText("Sign in"));
     }
+    public void finalizar(){
+        finalizarDriver();
+    }
+
 
 }

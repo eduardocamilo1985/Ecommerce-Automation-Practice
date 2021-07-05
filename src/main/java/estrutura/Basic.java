@@ -7,12 +7,17 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static estrutura.DriverFactory.getDriver;
+
 public class Basic {
 
     public void acessar(String url){
 
         getDriver().get(url);
     }
+    public void finalizarDriver(){
+        getDriver().quit();
+    }
+
 
     //####### manipulação de texto
     public void escrever(By by, String texto ){
@@ -24,12 +29,19 @@ public class Basic {
 
         getDriver().findElement(by).sendKeys(Keys.TAB);
     }
-
     public String obterTexto(By by){
-       return getDriver().findElement(by).getAttribute("value");
+
+        return getDriver().findElement(by).getAttribute("value");
     }
 
+    public String obterTextoNaTela(By by){
+        return getDriver().findElement(by).getText();
+    }
 
+    public void limparCampo(By by){
+        getDriver().findElement(by).clear();  // novo para subir no git
+
+    }
 
     //####### combos
     public void selecionarTexto(By by,String texto){
@@ -47,7 +59,9 @@ public class Basic {
         WebDriverWait espera = new WebDriverWait(getDriver(),30);
         espera.until(ExpectedConditions.elementToBeClickable(by));
     }
-
-
+    public void esperaImplicitaClasse(By by){
+        WebDriverWait espera = new WebDriverWait(getDriver(),30);
+        espera.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
 
 }

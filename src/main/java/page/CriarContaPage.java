@@ -3,7 +3,10 @@ package page;
 import estrutura.Basic;
 import org.openqa.selenium.By;
 
+import java.io.IOException;
+
 public class CriarContaPage extends Basic {
+    //Mensagens que devem aparecer quando um campo obrigatório não for preenchido
     public String mensagemCountryInvalid="Country is invalid";
     public String mensagemFirstNameRequired="firstname";
     public String mensagemLastNameRequired="lastname";
@@ -15,7 +18,7 @@ public class CriarContaPage extends Basic {
     public String mensagemMobilePhoneRequired="You must register at least one phone number.";
 
     public void radioMr() {
-        esperaImplicita(By.id("id_gender1"));
+        esperaExplicita(By.id("id_gender1"));
         clicar(By.id("id_gender1"));
     }
 
@@ -24,7 +27,7 @@ public class CriarContaPage extends Basic {
     }
 
     public void firstName(String nome) {
-        esperaImplicita(By.id("customer_firstname"));
+        esperaExplicita(By.id("customer_firstname"));
         escrever(By.id("customer_firstname"), nome);
     }
 
@@ -128,19 +131,21 @@ public class CriarContaPage extends Basic {
         escrever(By.id("alias"), "");
     }
 
-    public void btnRegister() {
-
+    public void btnRegister() throws IOException {
+        printarTela("PrintAntesSalvarCadastro");
         clicar(By.id("submitAccount"));
+        printarTela("PrintSalvarCadastro");
     }
 
+
     public String lastNameRequired() {
-        esperaImplicitaClasse(By.xpath("//div[@class='alert alert-danger']"));
+        esperaExplicitaClasse(By.xpath("//div[@class='alert alert-danger']"));
         return obterTextoNaTela(By.xpath("//*[contains(text(),'is required')]//ancestor::b[contains(text(),'lastname')]"));
 
     }
 
     public String firstNameRequired() {
-        esperaImplicitaClasse(By.xpath("//div[@class='alert alert-danger']"));
+        esperaExplicitaClasse(By.xpath("//div[@class='alert alert-danger']"));
         return obterTextoNaTela(By.xpath("//*[contains(text(),'is required')]//ancestor::b[contains(text(),'firstname')]"));
 
     }

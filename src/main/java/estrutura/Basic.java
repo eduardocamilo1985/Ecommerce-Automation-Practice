@@ -1,12 +1,19 @@
 package estrutura;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+
 import static estrutura.DriverFactory.getDriver;
+import static estrutura.DriverFactory.killDriver;
 
 public class Basic {
 
@@ -14,8 +21,8 @@ public class Basic {
 
         getDriver().get(url);
     }
-    public void finalizarDriver(){
-        getDriver().quit();
+    public void fecharNavegador(){
+        killDriver();
     }
 
 
@@ -39,7 +46,7 @@ public class Basic {
     }
 
     public void limparCampo(By by){
-        getDriver().findElement(by).clear();  // novo para subir no git
+        getDriver().findElement(by).clear();
 
     }
 
@@ -49,19 +56,26 @@ public class Basic {
         selecionar.selectByVisibleText(texto);
     }
 
-       //####### clica em alguma coisa
+    //####### clica em alguma coisa
     public void clicar(By by){
         getDriver().findElement(by).click();
     }
 
+
     //####### espera
-    public void esperaImplicita(By by){
+    public void esperaExplicita(By by){
         WebDriverWait espera = new WebDriverWait(getDriver(),30);
         espera.until(ExpectedConditions.elementToBeClickable(by));
     }
-    public void esperaImplicitaClasse(By by){
+    public void esperaExplicitaClasse(By by){
         WebDriverWait espera = new WebDriverWait(getDriver(),30);
         espera.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+    public void printarTela(String nomeArquivo) throws IOException {
+
+        TakesScreenshot print =(TakesScreenshot) getDriver();
+        File arquivo = print.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(arquivo, new File( nomeArquivo + ".jpg"));
     }
 
 }

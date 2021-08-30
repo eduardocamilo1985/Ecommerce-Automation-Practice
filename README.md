@@ -23,8 +23,8 @@ Conforme informações retiradas no próprio site, ele serve “para ajudar a pr
 ![IntelliJ](icon/IntelliJ.png)
 ![java](icon/java.png) 
 ![Junit](icon/Junit.png)
-![Maven](icon/maven.png)
-![Selenium](icon/seleniumWebDriver.png)
+![Maven](icon/Maven.png)
+![Selenium](icon/SeleniumWebDriver.png)
 
 
 **Linguagem:** Java

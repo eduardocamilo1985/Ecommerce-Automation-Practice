@@ -37,7 +37,6 @@ public class EvidenciaWord {
         mainDocumentPart.addStyledParagraphOfText("Heading3", "Resultado esperado: Não concluir o cadastro e exibir as mensagens de alertas");
         inserirImagem("PrintSalvarCadastro");
         wordPackage.save(arquivo);
-
     }
 
     private void inserirImagem(String nomeImagem) throws Exception {

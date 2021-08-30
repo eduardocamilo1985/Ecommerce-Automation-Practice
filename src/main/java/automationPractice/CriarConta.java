@@ -1,6 +1,7 @@
 package automationPractice;
 
 import estrutura.EvidenciaWord;
+import estrutura.Util;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,13 +9,13 @@ import page.AutenticacaoPage;
 import page.CriarContaPage;
 import page.HomePage;
 import page.MyAccountPage;
-
 import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CriarConta {
-    String email = "emailTeste989@teste.com.br";
+    Util utilidades = new Util();
+    //E-mail já cadastrado usar o testefulano@teste.com - será automatizado na proxima versão
+    String email = utilidades.email();
     String firstName = "Fulano de tal";
     String lastName = "da Silva";
     EvidenciaWord gerarEvidencia = new EvidenciaWord();
@@ -37,7 +38,7 @@ public class CriarConta {
 
     @Test
     public void criarContaEmailJaCadastrado() throws InterruptedException {
-        assertEquals(autenticacao.mensagemContaExistente, autenticacao.verificarMensagemContaExistente());
+       assertEquals(autenticacao.mensagemContaExistente, autenticacao.verificarMensagemContaExistente());
     }
 
     @Test

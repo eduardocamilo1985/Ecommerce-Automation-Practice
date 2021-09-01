@@ -9,15 +9,16 @@ import page.AutenticacaoPage;
 import page.CriarContaPage;
 import page.HomePage;
 import page.MyAccountPage;
+
 import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CriarConta {
     Util utilidades = new Util();
-    //E-mail já cadastrado usar o testefulano@teste.com - será automatizado na proxima versão
     String email = utilidades.email();
-    String firstName = "Fulano de tal";
-    String lastName = "da Silva";
+    String firstName = utilidades.name();
+    String lastName = utilidades.lastName();
     EvidenciaWord gerarEvidencia = new EvidenciaWord();
     HomePage home = new HomePage();
     AutenticacaoPage autenticacao = new AutenticacaoPage();
@@ -31,14 +32,15 @@ public class CriarConta {
         autenticacao.emailParaNovaConta(email);
         autenticacao.btnCreateAnAccount();
     }
+
     @AfterEach
-    public void finalizaDriver(){
+    public void finalizaDriver() {
         home.finalizar();
     }
 
     @Test
     public void criarContaEmailJaCadastrado() throws InterruptedException {
-       assertEquals(autenticacao.mensagemContaExistente, autenticacao.verificarMensagemContaExistente());
+        assertEquals(autenticacao.mensagemContaExistente, autenticacao.verificarMensagemContaExistente());
     }
 
     @Test
@@ -48,10 +50,10 @@ public class CriarConta {
         criarConta.dia("1  ");
         criarConta.mes("October ");
         criarConta.ano("1985  ");
-        criarConta.company("Tabajara");
-        criarConta.address2("Endereço 2");
-        criarConta.additionalInf("Preenchendo campo informações adicionais");
-        criarConta.homePhone("12345678");
+        criarConta.company(utilidades.company());
+        criarConta.address2(utilidades.address());
+        criarConta.additionalInf(utilidades.inf());
+        criarConta.homePhone(utilidades.phone());
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemFirstNameRequired, criarConta.firstNameRequired());
         assertEquals(criarConta.mensagemLastNameRequired, criarConta.lastNameRequired());
@@ -66,7 +68,7 @@ public class CriarConta {
     }
 
     @Test
-    public void criarContaCamposObrigatorios() throws IOException {
+    public void criarContaCamposObrigatorios() throws Exception {
         //cria conta somente com os campos obrigatorios.
 
         criarConta.firstName(firstName);
@@ -76,19 +78,19 @@ public class CriarConta {
         criarConta.password("123456");
         assertEquals(firstName, criarConta.firstName2());
         assertEquals(lastName, criarConta.lastName2());
-        criarConta.address("Rua abcd 123456");
-        criarConta.city("Rio de Janeiro");
+        criarConta.address(utilidades.address());
+        criarConta.city(utilidades.city());
         criarConta.state("Florida");
-        criarConta.zipCode("12345");
+        criarConta.zipCode(utilidades.zipCode());
         criarConta.country("United States");
-        criarConta.mobilePhone("221212121");
+        criarConta.mobilePhone(utilidades.phone());
         criarConta.btnRegister();
         assertEquals(myAcconunt.mensagemDeSucessoCriacaoConta, myAcconunt.verificaMensagemSucesso());
-
+        gerarEvidencia.geraEvidenciaContaSoCamposObrigatorios("Realiza o cadastro preenchendo somente os campos obrigatórios");
     }
 
     @Test
-    public void criarContaVerificacaoCompleta() throws IOException {
+    public void criarContaVerificacaoCompleta() throws Exception {
         criarConta.radioMr();
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemFirstNameRequired, criarConta.firstNameRequired());
@@ -107,27 +109,27 @@ public class CriarConta {
         criarConta.ano("1985  ");
         assertEquals(firstName, criarConta.firstName2());
         assertEquals(lastName, criarConta.lastName2());
-        criarConta.company("Tabajara");
+        criarConta.company(utilidades.company());
 
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemAddress1Required, criarConta.address1Required());
-        criarConta.address("Rua abcd 123456");
-        // criarConta.address2("Endereço 2");
+        criarConta.address(utilidades.address());
+        //criarConta.address2(utilidades.address());
 
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemcityRequired, criarConta.cityRequired());
-        criarConta.city("Rio de Janeiro");
+        criarConta.city(utilidades.city());
         criarConta.country("-");
 
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemCountryInvalid, criarConta.countryInvalid());
         criarConta.country("United States");
-        criarConta.additionalInf("Preenchendo campo informações adicionais");
-        criarConta.homePhone("12345678");
+        criarConta.additionalInf(utilidades.inf());
+        criarConta.homePhone(utilidades.phone());
 
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemZipInvalid, criarConta.zipCodeRequired());
-        criarConta.zipCode("12345");
+        criarConta.zipCode(utilidades.zipCode());
 
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemStateRequired, criarConta.stateRequired());
@@ -136,11 +138,13 @@ public class CriarConta {
         criarConta.btnRegister();
         assertEquals(criarConta.mensagemPasswdRequired, criarConta.passwdRequired());
         assertEquals(criarConta.mensagemMobilePhoneRequired, criarConta.mobilePhoneRequired());
-        criarConta.mobilePhone("221212121");
+        criarConta.mobilePhone(utilidades.phone());
         criarConta.password("123456");
-        //criarConta.futureReference("Avenida abcd 1234567"); // verificar porque não tá alterando o texto
+        criarConta.futureReference(utilidades.address());
         criarConta.btnRegister();
         assertEquals(myAcconunt.mensagemDeSucessoCriacaoConta, myAcconunt.verificaMensagemSucesso());
+        gerarEvidencia.geraEvidenciaContaCompleta("Realiza o cadastro completo do usuário");
+
     }
 }
 

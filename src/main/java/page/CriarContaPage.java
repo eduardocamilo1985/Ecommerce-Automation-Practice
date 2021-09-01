@@ -128,7 +128,7 @@ public class CriarContaPage extends Basic {
 
     public void futureReference(String texto) {
         limparCampo(By.id("alias"));
-        escrever(By.id("alias"), "");
+        escrever(By.id("alias"),texto);
     }
 
     public void btnRegister() throws IOException {
@@ -161,7 +161,7 @@ public class CriarContaPage extends Basic {
     }
 
     public String cityRequired() {
-        return obterTextoNaTela(By.xpath("//*[contains(text(),'is required')]//ancestor::b[contains(text(),'city')]"));
+         return obterTextoNaTela(By.xpath("//*[contains(text(),'is required')]//ancestor::b[contains(text(),'city')]"));
 
     }
 
@@ -170,6 +170,7 @@ public class CriarContaPage extends Basic {
     }
 
     public String zipCodeRequired() {
+        esperaExplicitaClasse(By.xpath("//div[@class='alert alert-danger']"));
         return obterTextoNaTela(By.xpath("//*[contains(text(),'It must follow this format: 00000')]"));
     }
 

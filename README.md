@@ -39,7 +39,8 @@ Conforme informações retiradas no próprio site, ele serve “para ajudar a pr
 
 ## <a name="utilizacao"></a>Utilização/estrutura
 
-Realizar o download do projeto (via git clone ou arquivo zip)
+Realizar o download do projeto (via git clone ou arquivo zip).
+
 Importar o projeto na sua IDE de desenvolvimento favorita
 
 **Estrutura do projeto**
@@ -58,7 +59,12 @@ ideal seria ter uma única classe que representasse a parte selenium. Não fiz d
 por achar mais simples que a própria Page insira o localizador do elemento.  
 
   A classe **EvidenciaWord** é responsável por criar o arquivo docx (arquivo Word) que servirá para evidenciar 
-os testes realizados. 
+os testes realizados. As evidências de testes serão geradas na pasta raiz do projeto.
+
+A classe **Util** contém métodos que facilitam a vida das classes de teste, é 
+lá por exemplo, que são feitas as chamadas para 
+o JavaFaker (é uma biblioteca que pode ser usada para gerar uma grande variedade 
+de dados reais como nome, e-mails endereço, etc. Muito bom para gerar massa de dados). 
  
   A **package Page** contém todo o mapeamento de elementos do site. Para cada página do site, 
 existe uma classe chamada NomePaginaPage que extende a classe Basic. Exemplo página da criação da conta = CriarcontaPage.  
@@ -107,6 +113,14 @@ mensagens informativas sobre campos obrigatórios não preenchidos
 - No formulário de cadastro de usuário, preencher somente os campos
 obrigatórios (campos que estão com o asterisco)
 
+- Realizar as seguintes checagens (via assertEquals):
+
+  - [ ] Verificar se o e-mail inserido para cadastro é o mesmo carregado no formulário de cadastro
+
+  - [ ] Verificar se o texto inserido nos campos "First name" e "Last Name" também aparecem nos 
+  mesmos campos da seção "Your Address"  
+
+
 - Clicar no botão  "Register"
 
 - Verificar se o usuário é redirecionado para tela de boas vindas (criar um assert)
@@ -122,7 +136,16 @@ obrigatórios (campos que estão com o asterisco)
 
 - Em "Create An Account" preencher o campo de e-mail e clicar no botão "Create an Account"
 
-- No formulário de cadastro de usuário, preencher todos os campos 
+- Realizar as seguintes checagens (via assertEquals):
+
+  - [ ] Verificar se o e-mail inserido para cadastro é o mesmo carregado no formulário de cadastro
+
+  - [ ] Verificar se o texto inserido nos campos "First name" e "Last Name" também aparecem nos
+    mesmos campos da seção "Your Address"
+
+
+- No formulário de cadastro do usuário, preencher os campos e verificar as mensagens de alertas. 
+Após a conferência de todas, deixar todos os campos preenchidos.  
 
 - Clicar no botão  "Register"
 
@@ -142,6 +165,8 @@ obrigatórios (campos que estão com o asterisco)
 
 **Resultado esperado:** O sistema deve exibir mensagem informando que o e-mail já está cadastrado
 
+###### Não foram criados testes automáticos para verificação de tamanho de campos
+
 ## <a name="link"></a>Links para consulta
 
 [http://automationpractice.com/index.php](http://automationpractice.com/index.php)
@@ -152,6 +177,7 @@ obrigatórios (campos que estão com o asterisco)
 
 [https://www.docx4java.org/trac/docx4j](https://www.docx4java.org/trac/docx4j)
 
+[https://www.baeldung.com/java-faker](https://www.baeldung.com/java-faker)
 
   
 

@@ -38,6 +38,45 @@ public class EvidenciaWord {
         inserirImagem("PrintSalvarCadastro");
         wordPackage.save(arquivo);
     }
+    public void geraEvidenciaContaSoCamposObrigatorios(String nomeArquivo) throws Docx4JException, Exception {
+        wordPackage = WordprocessingMLPackage.createPackage();
+        mainDocumentPart = wordPackage.getMainDocumentPart();
+        arquivo = new File(nomeArquivo + ".docx");
+        mainDocumentPart.addStyledParagraphOfText("Title", nomeArquivo);
+        mainDocumentPart.addStyledParagraphOfText("Heading2", "Autor: Eduardo Camilo da Silva");
+        mainDocumentPart.addStyledParagraphOfText("Heading2", "Passos realizados:");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "1 - Acessar o sistema");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "2 - Clicar em Sig In");
+        inserirImagem("cliqueEmSignin");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "3 - Inserir E-mail e clicar em Create an account");
+        inserirImagem("PrintInserirEmail");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "4 - Preencher somente os obrigatórios e clicar em Register");
+        inserirImagem("PrintAntesSalvarCadastro");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "Resultado esperado: concluir o cadastro e exibir tela com mensagem de boas vindas");
+        inserirImagem("PrintSalvarCadastro");
+       wordPackage.save(arquivo);
+    }
+
+    public void geraEvidenciaContaCompleta(String nomeArquivo) throws Docx4JException, Exception {
+        wordPackage = WordprocessingMLPackage.createPackage();
+        mainDocumentPart = wordPackage.getMainDocumentPart();
+        arquivo = new File(nomeArquivo + ".docx");
+        mainDocumentPart.addStyledParagraphOfText("Title", nomeArquivo);
+        mainDocumentPart.addStyledParagraphOfText("Heading2", "Autor: Eduardo Camilo da Silva");
+        mainDocumentPart.addStyledParagraphOfText("Heading2", "Passos realizados:");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "1 - Acessar o sistema");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "2 - Clicar em Sig In");
+        inserirImagem("cliqueEmSignin");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "3 - Inserir E-mail e clicar em Create an account");
+        inserirImagem("PrintInserirEmail");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "4 - Preencher os campos e clicar em Register," +
+                " verificando as mensagens de alerta quando o campo obrigatório não for preenchido. " +
+                "Por fim preencher todos os campos e clicar em Register ");
+        inserirImagem("PrintAntesSalvarCadastro");
+        mainDocumentPart.addStyledParagraphOfText("Heading3", "Resultado esperado: concluir o cadastro e exibir tela com mensagem de boas vindas");
+        inserirImagem("PrintSalvarCadastro");
+        wordPackage.save(arquivo);
+    }
 
     private void inserirImagem(String nomeImagem) throws Exception {
         File imagem = new File(nomeImagem + ".jpg");
